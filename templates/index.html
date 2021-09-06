@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VWise Bot</title>
+        <link rel="stylesheet" href="../static/style.css" type="text/css">
+        <style>
+          body {
+            background-image: url('../static/background.jpg');
+          }
+          </style>
+    </head>
+    <body>
+      
+      <h1 class="heading">
+        Welcome to the Survey! Please go ahead and answer the questions
+      </h1>
+      <div class="form1">
+      <form id="form2" name=survey action="/bot" method="POST">
+        <div id=form3>
+        <div class="formelement" >  
+          <label for="name">Enter your name</label>
+
+          <input type="radio" id="gender" name="gendergroup" value="Female">
+          <label for="gender" name="agegroup">Mrs.</label>
+
+          <input type="radio" id="gender1" name="gendergroup" value="Male">
+          <label for="gender1" name="agegroup">Mr.</label>
+          
+          <input type="text" id="name" name="name1"><br>
+        </div>
+
+        <div  class="formelement">
+          <label>Choose your age group</label>
+          <input type="radio" id="age1" name="agegroup" value="18-25">
+          <label for="age1" name="agegroup">18-25</label>
+
+          <input type="radio" id="age2" name="agegroup" value="26-35">
+          <label for="age2" name="agegroup">26-35</label>
+
+          <input type="radio" id="age3" name="agegroup" value="36-45">
+          <label for="age3" name="agegroup">36-45</label>
+
+          <input type="radio" id="age4" name="agegroup" value="46-55">
+          <label for="age4" name="agegroup">46-55</label>
+
+          <input type="radio" id="age5" name="agegroup" value="56-65">
+          <label for="age5" name="agegroup">56-65</label>
+
+          <input type="radio" id="age6" name="agegroup" value="66-75">
+          <label for="age6" name="agegroup">66-75</label>
+
+          <input type="radio" id="age7" name="agegroup" value="75 and above">
+          <label for="age7" name="agegroup">75 and above</label>
+        </div>
+
+        <div class="formelement">
+          <label for="country">Enter your country</label>
+          <input type="text" id="country"><br>
+        </div>
+        
+        <div  class="formelement"  id=form1>
+          <label>What is your COVID-19 vaccination status?</label>
+          <input type="radio" id="vacstat11" name="vacstatgroup" value="FV">
+          <label for="vacstat1" name="agegroup">Fully vaccinated</label>
+
+          <input type="radio" id="vacstat2" name="vacstatgroup" value="PV">
+          <label for="vacstat2" name="agegroup">Partially vaccinated</label>
+
+          <input type="radio" id="agvacstat3" name="vacstatgroup" value="NVIV">
+          <label for="vacstat13" name="agegroup">Not vaccinated, but intending to get vaccinated</label>
+
+          <input type="radio" id="vacstat4" name="vacstatgroup" value="NCNIV">
+          <label for="vacstat4" name="agegroup">Not vaccinated and not intending to get vaccinated</label>
+          <br>
+        </div>
+      </div>
+          <button class="submit" onclick="document.getElementById('form2').style.display='none'">Submit the Survey</button>
+
+      </form>
+      </div>
+
+<!-- <img src="https://i.pinimg.com/originals/dd/7a/f3/dd7af32e837d47be5c8d8e8a65b140c2.gif"/> -->
+
+
+<!-- <script>!(function () {
+    let e = document.createElement("script"),
+      t = document.head || document.getElementsByTagName("head")[0];
+    (e.src =
+      "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+      // Replace 1.x.x with the version that you want
+      (e.async = !0),
+      (e.onload = () => {
+        window.WebChat.default(
+          {
+            customData: { language: "en" },
+            // socketUrl: "http://localhost:5005",
+            socketUrl: "http://localhost:5005",
+            initPayload:'/greet',
+            title: "VWise Bot",
+            subtitle: "Get started!!",
+            onSocketEvent: function(){onChatClose:'/greet'; storage: localStorage.clear()},
+            storage: localStorage.clear(),
+            onChatClose:'/greet'
+            // add other props here
+          },
+          null
+        );
+      }),
+      t.insertBefore(e, t.firstChild);
+  })();
+  </script> -->
+
+
+    </body>
+</html>

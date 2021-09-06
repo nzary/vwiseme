@@ -1,0 +1,14 @@
+2021-08-08 13:03:41,070 [INFO ]  Starting Rasa server on http://localhost:5005
+2021-08-08 13:03:41,101 [INFO ]  Loading model models\20210808-102834.tar.gz...
+2021-08-08 13:03:45,247 [INFO ]  Loading model models\20210808-102834.tar.gz...
+2021-08-08 13:04:47,883 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2021-08-08 13:06:07,384 [INFO ]  Rasa server is up and running.
+2021-08-08 13:18:36,531 [INFO ]  Killing Sanic server now.
+2021-08-08 13:18:36,531 [ERROR]  Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "c:\users\sreelakshmi.kaladhar\anaconda3\envs\env\lib\asyncio\events.py", line 81, in _run
+    self._context.run(self._callback, *self._args)
+  File "c:\users\sreelakshmi.kaladhar\anaconda3\envs\env\lib\asyncio\proactor_events.py", line 162, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host

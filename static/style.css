@@ -1,0 +1,36 @@
+.heading{
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    align-self: center;
+    align-content: center;
+    margin-top: 5%;
+    margin-left: 15%;
+    border-color: blueviolet;
+    border-width: 30px;
+    border-radius: 100px;
+}
+img{
+    width: 200;
+    height: 100;
+    margin-top: 15%;
+    margin-left: 65%;
+}
+
+.form1{
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.survey_head{
+    margin-bottom: 100px;
+}
+
+.formelement{
+    margin-bottom: 20px;
+}
+
+.submit{
+    margin-top: 40px;
+    margin-left: 100px;
+}
