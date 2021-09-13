@@ -49,8 +49,13 @@ import sqlite3
 # def user(usr):
 #     return f"<h1>{usr} </h1>"
 
+        
+
+
 app= Flask(__name__)
-randomstr=''.join(random.choices(string.ascii_letters+string.digits,k=10))
+randomstr=''
+# print("Random String in the very beginning is : ",randomstr)
+print("Random String in the app is : ",randomstr)
 
 
 @app.route('/')
@@ -60,22 +65,33 @@ def index():
 
 @app.route('/bot',methods=["POST"])
 def bot():
-    print("HELLO*********************************************")
+    
     if request.method=="POST":
         con=sqlite3.connect("surveydetails.db")
         cursor=con.cursor()
-        global randomstr
-        randomstr = ''.join(random.choices(string.ascii_letters+string.digits,k=10))
+        # global randomstr
+        # randomstr = ''.join(random.choices(string.ascii_letters+string.digits,k=10))
         print("Random String inside function is : ",randomstr)
-        person_name=request.form['name1']
+        # person_name=request.form['name1']
         person_gender=request.form['agegroup']
         person_age=request.form['gendergroup']
-        person_vaccinestat=request.form['vacstatgroup']
+        person_country=request.form['country']
+        person_q1=request.form['likert1']
+        person_q2=request.form['likert2']
+        person_q3=request.form['likert3']
+        person_q4=request.form['likert4']
+        person_q5=request.form['likert5']
+        person_q6=request.form['likert6']
+        person_q7=request.form['likert7']
+        person_q8=request.form['likert8']
+        person_q9=request.form['likert9']
+        person_q10=request.form['likert10']
+        # person_vaccinestat=request.form['vacstatgroup']
         # person_dateofsurvey=int(date('now'))
         try:
-            sql="""INSERT INTO Details VALUES(?,?,?,?,?)"""
+            sql="""INSERT INTO SurveyDetails VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
             # result=cursor.execute(sql)
-            result=cursor.execute(sql,(randomstr,person_name,person_gender,person_age,person_vaccinestat))
+            result=cursor.execute(sql,(randomstr,person_gender,person_age,person_country,person_q1,person_q2,person_q3,person_q4,person_q5,person_q6,person_q7,person_q8,person_q9,person_q10))
             
             if result==0:
                 print("Error in database")
@@ -89,55 +105,13 @@ def bot():
             print(str(e))
             return redirect('/')
        
-        # return '<h1> Name is: {} and age is {}</h1>'.format(person_name,person_age)
+       
+
 def sendrandom():
     print("The value received by bot is : ",randomstr)
     return randomstr
-    # con=db_connection()
-    # cursor=con.cursor()
-    # # title="Thank you"
-
-
-# @app.route("/webhook")
-# def webhook():
-#     print("*******************************",randomstr)
-
-    # randomstr = ''.join(random.choices(string.ascii_letters+string.digits,10))
-    # person_name=request.form['name1']
-    # person_gender=request.form['agegroup']
-    # person_age=request.form['gendergroup']
-    # person_vaccinestat=request.form['vacstatgroup']
-    # q="""SELECT DATE('now')"""
-    # person_dateofsurvey=cursor.execute(q)
-    # cursor.close()
-    # con.commit()
-
-    # cursor=con.cursor()
-    # d="""INSERT INTO demo VALUES(?,?)"""
-    # result=cursor.execute(d,("sree","12"))
-
-    # person_dateofsurvey=DATE('now')
-    # sql="""INSERT INTO SurveyDetails VALUES(?,?,?,?,?,?)"""
-    # # result=cursor.execute(sql,("randomstr","person_name","person_gender",12,"person_vaccinestat",person_dateofsurvey))
-    # result=cursor.execute(sql,(randomstr,person_name,person_gender,person_age,person_vaccinestat,person_dateofsurvey))
-    # if result==0:
-    #     print("Error in database")
-    # else:
-    #     print("Success")
-    # con.commit()
-    # cursor.close()
-    # con.close()
-    # if request.method=="POST":
-        
-    # person_new_data=SurveyDetails(id=randomstr,name=person_name,gender=person_gender,age=person_age,vaccinestat=person_vaccinestat)
-        # commit to database
-    
-            # db.session.add(person_new_data)
-            # db.session.commit()
-            # return redirect('/bot')
-    
-    # else:   
-    #     return render_template("bot.html", name=person_name)
+ 
 
 if __name__=="__main__":
+    
     app.run(debug=True)

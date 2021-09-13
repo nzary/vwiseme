@@ -44,8 +44,8 @@ intents:
     use_entities: true
 - nlu_fallback:
     use_entities: true
-- restart
-
+- restart:
+    use_entities: true
 entities:
 - name
 - age
@@ -175,7 +175,7 @@ responses:
   - text: It depends on the virus, but common signs include respiratory symptoms, fever, cough, shortness of breath, and breathing difficulties. In more severe cases, infection can cause pneumonia, severe acute respiratory syndrome, kidney failure and even death.
   utter_faq/transmission:
   - text: COVID-19 infection mainly occurs from people when they have symptoms. It can also occur just before patients develop symptoms (pre-symptomatic) or from people not showing any symptoms (asymptomatic).
-  - text: "The COVID-19 virus is transmitted mainly between people via respiratory droplets and this occurs when a person is in close contact (within 1 metre) with an infected person and exposure to potentially infective respiratory droplets occurs, for example, through coughing or sneezing. Transmission can also occur indirectly by contact with surfaces in the immediate environment or with objects used on or by the infected person."
+  - text: The COVID-19 virus is transmitted mainly between people via respiratory droplets and this occurs when a person is in close contact (within 1 metre) with an infected person and exposure to potentially infective respiratory droplets occurs, for example, through coughing or sneezing. Transmission can also occur indirectly by contact with surfaces in the immediate environment or with objects used on or by the infected person.
   utter_faq/treatment:
   - text: There is no specific treatment for disease caused by a novel coronavirus. However, many of the symptoms can be treated and therefore treatment based on the patient’s clinical condition. Moreover, supportive care for infected persons can be highly effective.
   utter_faq/health_workers:
@@ -183,9 +183,10 @@ responses:
   utter_faq/WHO_recommend:
   - text: WHO encourages all countries to enhance their surveillance for severe acute respiratory infections (SARI), to carefully review any unusual patterns of SARI or pneumonia cases and to notify WHO of any suspected or confirmed case of infection with novel coronavirus. Countries are encouraged to continue strengthening their preparedness for health emergencies in line with the International Health Regulations (2005).
   utter_faq/approval_process:
-  - text: "Like all vaccines, COVID-19 vaccines go through a rigorous, multi-stage testing process, including large (phase III) trials that involve tens of thousands of people.
-      \nAn external panel of experts convened by WHO analyzes the results from clinical trials, along with evidence on the disease, age groups affected, risk factors for disease, and other information. The panel recommends whether and how the vaccines should be used.
-      \nOnce a clinical trial indicates that a COVID-19 vaccine is safe and effective, a series of independent reviews of the efficacy and safety evidence is required. Part of this process also involves a review of all the safety evidence by the Global Advisory Committee on Vaccine Safety."
+  - text: |-
+      Like all vaccines, COVID-19 vaccines go through a rigorous, multi-stage testing process, including large (phase III) trials that involve tens of thousands of people. 
+      An external panel of experts convened by WHO analyzes the results from clinical trials, along with evidence on the disease, age groups affected, risk factors for disease, and other information. The panel recommends whether and how the vaccines should be used. 
+      Once a clinical trial indicates that a COVID-19 vaccine is safe and effective, a series of independent reviews of the efficacy and safety evidence is required. Part of this process also involves a review of all the safety evidence by the Global Advisory Committee on Vaccine Safety.
   utter_faq/makesure_sideeffects:
   - text: The clinical trials took place in the middle of the pandemic with many people getting exposed, it was easier for clinical trials to see if the vaccines worked or not. These trials, which include some groups at high risk for COVID-19, were specifically designed to identify any common side effects or other safety concerns.
   - text: Side-effects from vaccines happen in the very first days after taking the vaccine. During the vaccine trials, follow-up of individuals included the time during which side-effects could have occurred, with a large margin to make sure al side effects were captured.
@@ -193,26 +194,29 @@ responses:
   - text: The COVID-19 mRNA vaccine technology has been rigorously assessed for safety. Clinical trials have indicated that mRNA vaccines provide a long-lasting immune response. mRNA vaccine technology has been studied for several decades, including in the contexts of Zika, rabies, and influenza vaccines. mRNA vaccines are not live virus vaccines and do not interfere with human DNA.
   utter_faq/emergency:
   - text: WHO works to ensure that everyone, everywhere is protected by safe and effective vaccines. To do this, we help countries set up rigorous safety systems for vaccines and apply strict international standards to regulate them.
-  - text: Vaccines that are authorized for emergency use by WHO do so after going through an extensive review. This provides a stamp of quality, safety, efficacy, and manufacturing quality. To do that, we work closely with the European Medicines Agency and other national regulatory agencies.      
+  - text: Vaccines that are authorized for emergency use by WHO do so after going through an extensive review. This provides a stamp of quality, safety, efficacy, and manufacturing quality. To do that, we work closely with the European Medicines Agency and other national regulatory agencies.
   utter_faq/precautions_after_vaccine:
   - text: We do not yet know how long immunity from different COVID-19 vaccines will last. That is one reason why we must continue using all public health measures that work, such as hand hygiene, physical distancing, masks, ventilation and cough etiquette.
   utter_faq/benefits:
   - text: COVID-19 vaccines produce protection against the disease by helping you develop an immune response to the SARS-Cov-2 virus. This immunity helps you fight the virus if exposed. Some COVID-19 vaccines are now reported as effective against the infection also.
   - text: Getting vaccinated may also protect people around you, because if you are protected from getting infected and from disease, you are less likely to infect someone else. This is particularly important to protect people at increased risk for severe illness from COVID-19, such as healthcare providers, older or elderly adults, and people with other medical conditions.
   utter_faq/wear_mask:
-  - text: Wearing a mask always protects us by reducing the chance of disease transmission from sick, pre-symptomatic and asymptomatic infected persons to others.
-    image: "https://hyperaxion.com/wp-content/uploads/2020/04/Gifs-show-effectiveness-of-masks-in-preventing-Covid-19-2.gif"
+  - image: https://hyperaxion.com/wp-content/uploads/2020/04/Gifs-show-effectiveness-of-masks-in-preventing-Covid-19-2.gif
+    text: Wearing a mask always protects us by reducing the chance of disease transmission from sick, pre-symptomatic and asymptomatic infected persons to others.
   utter_faq/mask_type:
-  - text:  "The public should wear fabric masks. \nThe following groups should wear medical (surgical) masks-\n
-      \nHealth workers
-      \nPeople who have tested positive for COVID-19
-      \nAnyone suspected to have COVID-19,
-      \nPeople caring for suspected or confirmed cases of COVID-19 outside of health facilities
-      \nElderly people above 60 years of age
-      \nPeople with immunocompromised disorders"
+  - text: |-
+      The public should wear fabric masks. 
+      The following groups should wear medical (surgical) masks-
+       
+      Health workers 
+      People who have tested positive for COVID-19 
+      Anyone suspected to have COVID-19, 
+      People caring for suspected or confirmed cases of COVID-19 outside of health facilities 
+      Elderly people above 60 years of age 
+      People with immunocompromised disorders
   utter_faq/mask_protect:
-  - text: Wearing a mask can reduce the possibility of disease transmission and can help protect the community. But the use of a mask alone is not enough to protect you from COVID-19.
-    image: "https://www.co.washington.or.us/HHS/CommunicableDiseases/COVID-19/images/COVID-19-Prevention-Tips.jpg"
+  - image: https://www.co.washington.or.us/HHS/CommunicableDiseases/COVID-19/images/COVID-19-Prevention-Tips.jpg
+    text: Wearing a mask can reduce the possibility of disease transmission and can help protect the community. But the use of a mask alone is not enough to protect you from COVID-19.
   utter_faq/disadvantages_masks:
   - text: Mask use can have some disadvantages. Self-contamination can occur if people keep touching the outer surface of a mask with their hands and then touch their face. If non-medical masks are not changed when wet or soiled, this can create favorable conditions for breeding of micro-organisms.
   - text: Masks can also provide a false sense of security, leading to potentially lower adherence to other critical preventative measures. People with special needs may also have difficulties wearing masks. Sometimes, mask wearing might lead to potential breathing difficulties, headache, skin lesions, or discomfort.
@@ -245,8 +249,6 @@ responses:
   utter_chitchat/telljoke:
   - text: Today a man knocked on my door and asked me for a small donation towards the local swimming pool. I gave him a glass of water.
   - text: This is a very serious conversation! Stop trying to make jokes
-  # utter_chitchat/whatismyname:
-  # - text: It's classified!
   utter_chitchat/builder:
   - text: One of the smart programmers at MBRU.
   - text: Some lunatic, looking at my sense of humour.
@@ -289,23 +291,20 @@ actions:
 - action_submit
 - action_greet
 - action_say_name
-# - action_save
-# - validate_user_details_form
 - action_restart
 - action_save_feedback
 - action_unique_id
 - action_get_unique_id
-
 forms:
   user_details_form:
     required_slots:
-      name:
-        - type: from_entity
-          entity: name   
       age:
-        - type: from_entity
-          entity: age
+      - entity: age
+        type: from_entity
       country:
-        - type: from_entity
-          entity: country  
+      - entity: country
+        type: from_entity
+      name:
+      - entity: name
+        type: from_entity
 e2e_actions: []

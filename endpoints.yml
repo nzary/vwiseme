@@ -13,6 +13,15 @@
 action_endpoint:
  url: "http://localhost:5055/webhook"
  
+# action_endpoint:
+#    url: ${RASA_USER_APP}/webhook
+#    token: ""
+
+
+# models:
+#    url: ${RASA_MODEL_SERVER}
+#    token: ${RASA_X_TOKEN}
+#    wait_time_between_pulls: ${RASA_MODEL_PULL_INTERVAL}
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
