@@ -182,7 +182,7 @@ class ActionSubmit(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
             try:
-                db=sqlite3.connect("details.db")
+                db=sqlite3.connect("./details.db")
                 
                 cursor=db.cursor()
                 sender_id=tracker.current_state()['sender_id']

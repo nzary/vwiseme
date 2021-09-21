@@ -87,7 +87,7 @@ def bot():
     global randomstr
     randomstr = ''.join(random.choices(string.ascii_letters+string.digits,k=10))
     if request.method=="POST":
-        con=sqlite3.connect("surveydetails.db")
+        con=sqlite3.connect("./surveydetails.db")
         cursor=con.cursor()
                
         print("Random String got inside function is : ",randomstr)
