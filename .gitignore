@@ -1,4 +1,4 @@
-*.tar.gz
+*.gz
 *.db-shm
 *.db-wal
 *.sqbpro
