@@ -33,52 +33,179 @@ intents:
     use_entities: true
 - give_name:
     use_entities:
-    - name
-- give_age:
-    use_entities:
-    - age
-- give_country:
-    use_entities:
-    - country
-- rating_value:
-    use_entities: true
+      - name
 - nlu_fallback:
     use_entities: true
 - restart:
     use_entities: true
+- give_realistic:
+    use_entities:
+      - realistic
+- give_robotic:
+    use_entities:
+      - robotic
+- give_welcoming:
+    use_entities:
+      - welcoming
+- give_unfriendly:
+    use_entities:
+      - unfriendly
+- give_explainedscope:
+    use_entities:
+      - explainedscope
+- give_indication:
+    use_entities:
+      - indication
+- give_navigate:
+    use_entities:
+      - navigate
+- give_confused:
+    use_entities:
+      - confused
+- give_understoodme:
+    use_entities:
+      - understoodme
+- give_recogniseinputs:
+    use_entities:
+      - recogniseinputs
+- give_appropriateresponses:
+    use_entities:
+      - appropriateresponses
+- give_irrelevant:
+    use_entities:
+      - irrelevant
+- give_copeerrors:
+    use_entities:
+      - copeerrors
+- give_unablehandle:
+    use_entities:
+      - unablehandle
+- give_easytouse:
+    use_entities:
+      - easytouse
+- give_complex:
+    use_entities:
+      - complex
 entities:
 - name
-- age
-- country
-- rating
+- realistic
+- robotic
+- welcoming
+- unfriendly
+- explainedscope
+- indication
+- navigate
+- confused
+- understoodme
+- recogniseinputs
+- appropriateresponses
+- irrelevant
+- copeerrors
+- unablehandle
+- easytouse
+- complex
 slots:
+  start_time:
+    type: any
+    initial_value: null
+    influence_conversation: false
+  end_time:
+    type: any
+    initial_value: null
+    influence_conversation: false
   name:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  age:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  rating:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  country:
-    type: rasa.shared.core.slots.TextSlot
+    type: any
     initial_value: null
     auto_fill: true
     influence_conversation: false
   requested_slot:
     type: rasa.shared.core.slots.UnfeaturizedSlot
-    initial_value: null
+    # type: any
+    initial_value:
     auto_fill: true
     influence_conversation: false
   unique_id:
-    type: rasa.shared.core.slots.TextSlot
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  realistic:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  robotic:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  welcoming:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  unfriendly:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  explainedscope:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  indication:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  navigate:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  confused:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  understoodme:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  recogniseinputs:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  appropriateresponses:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  irrelevant:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  copeerrors:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  unablehandle:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  easytouse:
+    type: any
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  complex:
+    type: any
     initial_value: null
     auto_fill: true
     influence_conversation: false
@@ -117,7 +244,7 @@ responses:
   - text: I didn't quite understand that. Could you rephrase?
   utter_rating:
   - text: Could you please rate the servive out of 5.
-  utter_ask_handoff:
+  utter_askhandoff:
   - buttons:
     - payload: /affirm
       title: Yes
@@ -151,7 +278,7 @@ responses:
       - Sinopharm’s COVID-19 vaccine 
       - Sputnik V COVID-19 vaccine
   utter_feedback_ack:
-  - text: Thank you for your time and feedback.
+  - text: Thank you for your time and feedback Please click on the link http://vwise.me and fill up the form.
   utter_slot_booking:
   - text: Sorry!. We are not providing the requested service. You may download the apps from play store or app store to do it
   utter_faq/vaccine_safety:
@@ -273,12 +400,8 @@ responses:
     - payload: /deny
       title: No
     text: Are you sure the details are correct? \n Name {Name} \n Age {Age} \n Country {Country}
-  utter_ask_name:
+  utter_get_name:
   - text: How may I call you?
-  utter_ask_age:
-  - text: May I know your age?
-  utter_ask_country:
-  - text: Which country are you from?
   utter_details_thanks:
   - text: Thank you for your response! I will not bother you again with any personal questions. Trust me! 😄
   utter_name_short:
@@ -287,24 +410,120 @@ responses:
   - text: I think you are not born yet! Haha.
   utter_wrong_country:
   - text: I didn't understand that. Please help me with the correct country name.
+  utter_quality_questions:
+  - text: |
+      Dear, Please rate the bot experience on a scale 0-5. 
+
+       - 1 - Strongly Disagree
+       - 2 - Disagree
+       - 3 - Neutral
+       - 4 - Agree
+       - 5 - Strongly agree
+  utter_ask_realistic:
+  - text: The chatbot’s personality was realistic and engaging
+  utter_ask_robotic:
+  - text: The chatbot seemed too robotic
+  utter_ask_welcoming:
+  - text: The chatbot was welcoming during initial setup
+  utter_ask_unfriendly:
+  - text: The chatbot seemed very unfriendly
+  utter_ask_explainedscope:
+  - text: The chatbot explained its scope and purpose well
+  utter_ask_indication:
+  - text: The chatbot gave no indication as to its purpose
+  utter_ask_navigate:
+  - text: The chatbot was easy to navigate
+  utter_ask_confused:
+  - text: It would be easy to get confused when using the chatbot
+  utter_ask_understoodme:
+  - text: The chatbot understood me well
+  utter_ask_recogniseinputs:
+  - text: The chatbot failed to recognise a lot of my inputs
+  utter_ask_appropriateresponses:
+  - text: Chatbot responses were useful, appropriate and informative
+  utter_ask_irrelevant:
+  - text: Chatbot responses were irrelevant
+  utter_ask_copeerrors:
+  - text: ' The chatbot coped well with any errors or mistakes'
+  utter_ask_unablehandle:
+  - text: The chatbot seemed unable to handle any errors
+  utter_ask_easytouse:
+  - text: The chatbot was very easy to use
+  utter_ask_complex:
+  - text: The chatbot was very complex
 actions:
 - action_submit
 - action_greet
 - action_say_name
 - action_restart
 - action_save_feedback
-- action_unique_id
 - action_get_unique_id
+- action_get_start_time
+- action_get_end_time
 forms:
-  user_details_form:
+  bot_evaluation_form:
     required_slots:
-      age:
-      - entity: age
-        type: from_entity
-      country:
-      - entity: country
-        type: from_entity
-      name:
-      - entity: name
-        type: from_entity
+      appropriateresponses:
+      - type: from_entity
+        entity: appropriateresponses  
+      complex:
+      - type: from_entity
+        entity: complex
+        # type: from_entity
+      confused:
+      - type: from_entity
+        entity: confused
+        # type: from_entity
+      copeerrors:
+      - type: from_entity
+        entity: copeerrors
+        # type: from_entity
+      easytouse:
+      - type: from_entity
+        entity: easytouse
+        # type: from_entity
+      explainedscope:
+      - type: from_entity
+        entity: explainedscope
+        # type: from_entity
+      indication:
+      - type: from_entity
+        entity: indication
+        # type: from_entity
+      irrelevant:
+      - type: from_entity
+        entity: irrelevant
+        # type: from_entity
+      realistic:
+      - type: from_entity
+        entity: realistic
+        # type: from_entity
+      reanavigatelistic:
+      - type: from_entity
+        entity: navigate
+        # type: from_entity
+      recogniseinputs:
+      - type: from_entity
+        entity: recogniseinputs
+        # type: from_entity
+      robotic:
+      - type: from_entity
+        entity: robotic
+        # type: from_entity
+      unablehandle:
+      - type: from_entity
+        entity: unablehandle
+        # type: from_entity
+      understoodme:
+      - type: from_entity
+        entity: understoodme
+        # type: from_entity
+      unfriendly:
+      - type: from_entity
+        entity: unfriendly
+        # type: from_entity
+      welcoming:
+      - type: from_entity
+        entity: welcoming
+        # type: from_entity
 e2e_actions: []

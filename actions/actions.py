@@ -16,75 +16,51 @@ from rasa_sdk import Action, Tracker,FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 import sqlite3
-import main
+import time
+# import main
+
+class ActionGetChatStartTime(Action):
+    def name(self) -> Text:
+        return "action_get_start_time"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
+            start_time=time.time()
+           
+            
+            return [SlotSet("start_time", start_time)]
 
 
-# country_list=["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Bouvet Island","Brazil","British Indian Ocean Territory","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos","Keeling Islands","Colombia","Comoros","Congo","Cook Islands","Costa Rica","Cote D'Ivoire","Ivory Coast","Croatia","Hrvatska","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Malvinas","Faroe Islands","Fiji","Finland","France","France","Metropolitan","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Heard and McDonald Islands","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea","North","Korea","South","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","Northern Mariana Islands","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and The Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Seychelles","Sierra Leone","Singapore","Slovak Republic","Slovenia","Solomon Islands","Somalia","South Africa","S. Georgia and S. Sandwich Isls.","Spain","Sri Lanka","St. Helena","St. Pierre and Miquelon","Sudan","Suriname","Svalbard and Jan Mayen Islands","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","UAE","United Kingdom","Britain","UK","United States of America","USA","US Minor Outlying Islands","Uruguay","Uzbekistan","Vanuatu","Vatican City State","Holy See","Venezuela","Viet Nam","Virgin Islands","British","Virgin Islands","US","Wallis and Futuna Islands","Western Sahara","Yemen","Yugoslavia","Zaire","Zambia","Zimbabwe"]
-# c_list=[]
-# for item in country_list:
-#     c_list.append(item.lower())
-# print(c_list)
+class ActionGetChatEndTime(Action):
+    def name(self) -> Text:
+        return "action_get_end_time"
 
-# c="Sweden"
-# if c.lower() in c_list:
-#     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^I'm found^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+             
+            end_time=time.time()
 
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
-
-# class ActionSaveConversation(Action):
-
-#     def name(self) -> Text:
-#         return "action_save"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         f = open("output.txt", "a")
-#         print("**************************file opened***********************************")
-#         datalist=tracker.events
-        
-#         for i in datalist:
-#             if i['name']=="action_session_start":
-#                 print("--------New conversation started-----------",tracker.current_state()['sender_id'])
-#                 f.write(tracker.current_state()['sender_id'])
-#             if i['event']=="user":
-#                 print('user: ',i['parse_data']['text'])
-#                 f.write('user: {}'.format(i['text']))
-#             elif i['event']=="bot":
-#                 print('bot: ',i['parse_data']['text'])
-#                 f.write('bot: {}'.format(i['text']))
-#         #dispatcher.utter_message(text="Data saved!")
-#         print("Data Saved Successfully")
-#         f.close()
-#         return []
+            return [SlotSet("end_time", end_time)]
 
 class ActionGetUniqueId(Action):
-
     def name(self) -> Text:
         return "action_get_unique_id"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-            
-            randomstring=main.sendrandom()
-
-            # print("Unique number is: ",randomstring)
+           
+            randomstring=sendrandom()
+            # print("hello")
+            print("Unique number in actions.py is: ",randomstring)
 
             return [SlotSet("unique_id", randomstring)]
         
+# def sendrandomnumber(randomstring):
+#     return randomstring
 
 
 
@@ -99,14 +75,31 @@ class ActionSaveFeedback(Action):
             try:
                 db=sqlite3.connect("./details.db")
                 cursor=db.cursor()
-                Rating=tracker.get_slot("rating")
+                chat_start_time=tracker.get_slot("start_time")
+                chat_end_time=tracker.get_slot("end_time")
+                Rating1=tracker.get_slot("realistic")
+                Rating2=tracker.get_slot("robotic")
+                Rating3=tracker.get_slot("welcoming")
+                Rating4=tracker.get_slot("unfriendly")
+                Rating5=tracker.get_slot("explainedscope")
+                Rating6=tracker.get_slot("indication")
+                Rating7=tracker.get_slot("navigate")
+                Rating8=tracker.get_slot("confused")
+                Rating9=tracker.get_slot("understoodme")
+                Rating10=tracker.get_slot("recogniseinputs")
+                Rating11=tracker.get_slot("appropriateresponses")
+                Rating12=tracker.get_slot("irrelevant")
+                Rating13=tracker.get_slot("copeerrors")
+                Rating14=tracker.get_slot("unablehandle")
+                Rating15=tracker.get_slot("easytouse")
+                Rating16=tracker.get_slot("complex")
                 sender_id=tracker.current_state()['sender_id']
-                q="UPDATE UserDetails SET Rating= ? WHERE UserID = ?",(Rating,sender_id)
+                q="UPDATE UserDetails SET Realistic= ?,Robotic= ?,Welcoming= ?,Unfriendly= ?,ExplainedScope= ?,Indication= ?, Navigate= ?,Confused= ?,Understoodme=?, RecogniseInputs= ?, AppropriateResponses= ?, Irrelevant= ?, CopeErrors= ?, UnableHandle= ?, EasytoUse= ?, Complex= ?, StartTime= ?, EndTime=? WHERE UserID = ?",(Rating1,Rating2,Rating3,Rating4,Rating5,Rating6,Rating7,Rating8,Rating9,Rating10,Rating11,Rating12,Rating13,Rating14,Rating15,Rating16,sender_id, chat_start_time, chat_end_time)
                 result=cursor.execute(q)
                 if result==0:
                     print("Couldn't find such a database")
                 else:
-                    print("Rating Saved Successfully!!")
+                    print("Ratings from user Saved Successfully!!")
             # DataUpdate(tracker.get_slot("name"),tracker.get_slot("age"),tracker.get_slot("country"))
                     # dispatcher.utter_message(response="utter_details_thanks")
             except Exception as e:
@@ -151,22 +144,35 @@ class ActionSayName(Action):
             dispatcher.utter_message(text="I have a very good memory!. Your name is {Name} ! ")
         return []
 
-
-
-class UserDetailsForm(Action):
+class BotEvaluationForm(Action):
 
     def name(self) -> Text:
-        return "user_details_form"
+        return "bot_evaluation_form"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-            required_slots=["name","age","country"]
+            required_slots=["appropriateresponses","complex","confused","copeerrors","easytouse","explainedscope","indication","irrelevant","realistic","navigate","recogniseinputs","robotic","unablehandle","understoodme","unfriendly","welcoming"]
             for slot_name in required_slots:
                 if tracker.slots.get(slot_name) is  None:
                     return [SlotSet("requested_slot",slot_name)]
 
-            return [SlotSet("requested_slot",None)]
+                return [SlotSet("requested_slot",None)]
+
+# class UserDetailsForm(Action):
+
+#     def name(self) -> Text:
+#         return "user_details_form"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#             required_slots=["name","age","country"]
+#             for slot_name in required_slots:
+#                 if tracker.slots.get(slot_name) is  None:
+#                     return [SlotSet("requested_slot",slot_name)]
+
+#             return [SlotSet("requested_slot",None)]
 
 
 class ActionSubmit(Action):
@@ -176,16 +182,34 @@ class ActionSubmit(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
             try:
-                db=sqlite3.connect("./details.db")
+                db=sqlite3.connect("details.db")
                 
                 cursor=db.cursor()
                 sender_id=tracker.current_state()['sender_id']
                 Name=tracker.get_slot("name")
-                Age=tracker.get_slot("age")
-                Country=tracker.get_slot("country")
-                Rating=0
+                # Age=tracker.get_slot("age")
+                # Country=tracker.get_slot("country")
+                unique_id=tracker.get_slot("unique_id")
+                chat_start_time=0
+                chat_end_time=0
+                Rating1=0
+                Rating2=0
+                Rating3=0
+                Rating4=0
+                Rating5=0
+                Rating6=0
+                Rating7=0
+                Rating8=0
+                Rating9=0
+                Rating10=0
+                Rating11=0
+                Rating12=0
+                Rating13=0
+                Rating14=0
+                Rating15=0
+                Rating16=0
                 # q="""INSERT INTO UserDetails VALUES(?,?,?,?,?);"""
-                result=cursor.execute("INSERT INTO UserDetails VALUES(?,?,?,?,?)",(sender_id,Name,Age,Country,Rating))
+                result=cursor.execute("INSERT INTO UserDetails VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(sender_id,unique_id,Name,Rating1,Rating2,Rating3,Rating4,Rating5,Rating6,Rating7,Rating8,Rating9,Rating10,Rating11,Rating12,Rating13,Rating14,Rating15,Rating16,chat_start_time,chat_end_time))
                 if result==0:
                     print("Couldn't find such a database")
                 else:
@@ -376,4 +400,53 @@ class ActionSubmit(Action):
 
 
 
+# country_list=["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Bouvet Island","Brazil","British Indian Ocean Territory","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos","Keeling Islands","Colombia","Comoros","Congo","Cook Islands","Costa Rica","Cote D'Ivoire","Ivory Coast","Croatia","Hrvatska","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Malvinas","Faroe Islands","Fiji","Finland","France","France","Metropolitan","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Heard and McDonald Islands","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea","North","Korea","South","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","Northern Mariana Islands","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and The Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Seychelles","Sierra Leone","Singapore","Slovak Republic","Slovenia","Solomon Islands","Somalia","South Africa","S. Georgia and S. Sandwich Isls.","Spain","Sri Lanka","St. Helena","St. Pierre and Miquelon","Sudan","Suriname","Svalbard and Jan Mayen Islands","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","UAE","United Kingdom","Britain","UK","United States of America","USA","US Minor Outlying Islands","Uruguay","Uzbekistan","Vanuatu","Vatican City State","Holy See","Venezuela","Viet Nam","Virgin Islands","British","Virgin Islands","US","Wallis and Futuna Islands","Western Sahara","Yemen","Yugoslavia","Zaire","Zambia","Zimbabwe"]
+# c_list=[]
+# for item in country_list:
+#     c_list.append(item.lower())
+# print(c_list)
 
+# c="Sweden"
+# if c.lower() in c_list:
+#     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^I'm found^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+
+#
+# class ActionHelloWorld(Action):
+#
+#     def name(self) -> Text:
+#         return "action_hello_world"
+#
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#
+#         dispatcher.utter_message(text="Hello World!")
+#
+#         return []
+
+# class ActionSaveConversation(Action):
+
+#     def name(self) -> Text:
+#         return "action_save"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         f = open("output.txt", "a")
+#         print("**************************file opened***********************************")
+#         datalist=tracker.events
+        
+#         for i in datalist:
+#             if i['name']=="action_session_start":
+#                 print("--------New conversation started-----------",tracker.current_state()['sender_id'])
+#                 f.write(tracker.current_state()['sender_id'])
+#             if i['event']=="user":
+#                 print('user: ',i['parse_data']['text'])
+#                 f.write('user: {}'.format(i['text']))
+#             elif i['event']=="bot":
+#                 print('bot: ',i['parse_data']['text'])
+#                 f.write('bot: {}'.format(i['text']))
+#         #dispatcher.utter_message(text="Data saved!")
+#         print("Data Saved Successfully")
+#         f.close()
+#         return []

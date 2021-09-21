@@ -1,0 +1,77 @@
+version: "2.0"
+stories:
+- story: happy path
+  steps: 
+  - intent: mood_great
+  - action: utter_happy
+  # - action: action_save
+
+- story: greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_get_start_time  
+  - action: action_get_unique_id
+  - action: utter_get_name
+  - intent: give_name
+    entities:
+    - name: "Hitesh"
+  - slot_was_set:
+    - name: "Hitesh"
+
+  - action: action_submit
+  - action: utter_askfor_help
+
+
+- story: ask for help
+  steps:
+  - intent: help
+  - action: utter_help
+  # - action: action_save
+
+- story: user asking to repeat his name
+  steps:
+  - intent: repeat_name
+  - action: action_say_name 
+
+# - story: restart
+#   steps:
+#   - intent: restart
+#   - action: action_restart
+  
+
+- story: say good bye
+  steps:
+  - intent: goodbye
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_happy
+
+
+
+- story: sad path 1
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+
+
+- story: sad path 2
+  steps:
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+
+
+- story: vaccine slot booking request
+  steps:
+  - intent: vaccine_slot_booking
+  - action: utter_slot_booking
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_happy
+
+
